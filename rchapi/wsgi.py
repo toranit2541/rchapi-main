@@ -21,6 +21,6 @@ exec(open(activate_this).read(), dict(__file__=activate_this))
 os.environ['DJANGO_SETTINGS_MODULE'] = 'rchapi-main.settings'
 
 # Import Django WSGI application
-from django.core.wsgi import get_wsgi_application
+from django.core.wsgi import get_wsgi_application # type: ignore
 application = get_wsgi_application()
 
