@@ -1,0 +1,17 @@
+git clone https://github.com/toranit2541/rchapi-main.git
+
+cd rchapi-main
+
+python3 -m venv venv
+
+source venv/bin/activate
+
+pip install --upgrade pip
+
+pip install -r t.txt
+
+python manage.py migrate
+
+python manage.py collectstatic
+
+python manage.py createsuperuser
