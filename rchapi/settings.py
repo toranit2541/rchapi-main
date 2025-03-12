@@ -34,7 +34,7 @@ CORS_ALLOW_METHODS = [
 CORS_ALLOW_CREDENTIALS = True
 SECRET_KEY = 'django-insecure-y0=yu!_x^g5^00iv7=ndtm7k4q#fqg+a5=)2(@!!a&_e)3yzlb'
 DEBUG = False
-ALLOWED_HOSTS = ['toranit.pythonanywhere.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -104,8 +104,8 @@ DATABASES = {
         "ENGINE": "mssql",
         "NAME": "Ruamchai",
         "USER": "sa",
-        "PASSWORD": "P@ssw0rd",
-        "HOST": "192.168.0.111",
+        "PASSWORD": "Fin@l0",
+        "HOST": "171.103.208.149",
         "PORT": "1433",
         "OPTIONS": {
             "driver": "ODBC Driver 17 for SQL Server", 
