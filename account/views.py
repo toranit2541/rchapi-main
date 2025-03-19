@@ -16,6 +16,7 @@ from django.urls import get_resolver
 from django.http import JsonResponse
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     def post(self, request, *args, **kwargs):
@@ -102,4 +103,9 @@ def api_list_view(request):
             api_urls.append(str(pattern.pattern))
 
     return JsonResponse({'api_endpoints': api_urls}, status=200)
+
+class TestAccount(APIView):
+    permission_classes = [AllowAny]  # ✅ Open access for testing
+    def get(self, request):
+        return Response({"message": "This is a test endpoint for the Account app."}, status=status.HTTP_200_OK)
     

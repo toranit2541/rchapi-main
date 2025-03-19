@@ -2,8 +2,10 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status, viewsets
+from rest_framework.views import APIView
 from .models import Article
 from .serializers import ArticleSerializer
+from rest_framework.permissions import AllowAny
 
 class ArticleViewSet(viewsets.ModelViewSet):
     queryset = Article.objects.all()
@@ -55,3 +57,8 @@ class ArticleViewSet(viewsets.ModelViewSet):
         instance = self.get_object()
         instance.delete()
         return Response({"message": "Article hard-deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
+    
+class TestRcharticle(APIView):
+    permission_classes = [AllowAny]  # ✅ Open access for testing
+    def get(self, request):
+        return Response({"message": "This is a test endpoint for the RchArticle app."}, status=status.HTTP_200_OK)

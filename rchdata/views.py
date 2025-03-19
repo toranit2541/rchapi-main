@@ -6,9 +6,11 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import AllowAny
 from rest_framework.decorators import authentication_classes, permission_classes
 
 # Create your views here.
+from rest_framework.views import APIView
 from rest_framework import viewsets
 from .models import PtLabRes, PatientInHos, LabApplication, PatientData, LabResultDetail, VResultApp
 from .serializers import PtLabResSerializer, PatientInHosSerializer, LabApplicationSerializer, PatientDataSerializer ,LabResultDetailSerializer, VResultAppSerializer
@@ -208,3 +210,9 @@ def execute_query(citizen_id):
     
     except Exception as e:
         raise Exception(f"Dynamic SQL Execution Error: {str(e)}")
+    
+
+class TestRchdata(APIView):
+    permission_classes = [AllowAny]  # ✅ Open access for testing
+    def get(self, request):
+        return Response({"message": "This is a test endpoint for the RchData app."}, status=status.HTTP_200_OK)

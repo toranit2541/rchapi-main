@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 
+DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -22,7 +24,17 @@ CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = False
+CSRF_COOKIE_SECURE = True  # Use HTTPS for CSRF cookies
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+SRF_TRUSTED_ORIGINS = ["https://171.103.208.149"]
+X_FRAME_OPTIONS = 'DENY'
+SECURE_HSTS_PRELOAD = True
+
+
 CORS_ALLOW_METHODS = [
     "GET",
     "POST",
@@ -32,9 +44,9 @@ CORS_ALLOW_METHODS = [
     "OPTIONS",
 ]
 CORS_ALLOW_CREDENTIALS = True
-SECRET_KEY = 'django-insecure-y0=yu!_x^g5^00iv7=ndtm7k4q#fqg+a5=)2(@!!a&_e)3yzlb'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'fallback-key-change-this')
 DEBUG = False
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1','171.103.208.149']
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -99,19 +111,21 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'rchapi.wsgi.application'
+
 DATABASES = {
     "default": {
         "ENGINE": "mssql",
-        "NAME": "Ruamchai",
-        "USER": "sa",
-        "PASSWORD": "Fin@l0",
-        "HOST": "171.103.208.149",
-        "PORT": "1433",
+        "NAME": os.getenv("DB_NAME"),
+        "USER": os.getenv("DB_USER"),
+        "PASSWORD": os.getenv("DB_PASSWORD",""),
+        "HOST": os.getenv("DB_HOST"),
+        "PORT": os.getenv("DB_PORT", "1433"),
         "OPTIONS": {
-            "driver": "ODBC Driver 17 for SQL Server", 
+            "driver": "ODBC Driver 17 for SQL Server",
         },
     },
 }
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -131,7 +145,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_URL = '/static/'
 APPEND_SLASH = False
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

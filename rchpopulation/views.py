@@ -5,6 +5,9 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from .models import Population
 from .serializers import PopulationSerializer
+from rest_framework.views import APIView
+from rest_framework.permissions import AllowAny
+
 
 class PopulationViewSet(viewsets.ModelViewSet):
     queryset = Population.objects.all()
@@ -56,3 +59,10 @@ class PopulationViewSet(viewsets.ModelViewSet):
         instance = self.get_object()
         instance.delete()
         return Response({"message": "Population hard-deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
+    
+class TestRchpopulation(APIView):
+
+    permission_classes = [AllowAny]  # ✅ Open access for testing
+
+    def get(self, request):
+        return Response({"message": "TestRchpopulation"}, status=status.HTTP_200_OK)

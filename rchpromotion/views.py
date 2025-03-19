@@ -4,6 +4,8 @@ from rest_framework.decorators import action
 from .models import Promotion
 from .serializers import PromotionSerializer
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.views import APIView
+from rest_framework.permissions import AllowAny
 
 class PromotionViewSet(viewsets.ModelViewSet):
     queryset = Promotion.objects.all()
@@ -55,6 +57,12 @@ class PromotionViewSet(viewsets.ModelViewSet):
         instance = self.get_object()
         instance.delete()
         return Response({"message": "Promotion hard-deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
+    
+class TestRchpromotion(APIView):
+    permission_classes = [AllowAny]  # ✅ Open access for testing
+    
+    def get(self, request):
+        return Response({"message": "TestRchpromotion works."}, status=status.HTTP_200_OK)
 
 
     

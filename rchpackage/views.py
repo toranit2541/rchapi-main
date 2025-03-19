@@ -4,6 +4,8 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from .models import Package
 from .serializers import PackageSerializer
+from rest_framework.views import APIView
+from rest_framework.permissions import AllowAny
 
 class PackageViewSet(viewsets.ModelViewSet):
     queryset = Package.objects.all()
@@ -55,3 +57,8 @@ class PackageViewSet(viewsets.ModelViewSet):
         instance = self.get_object()
         instance.delete()
         return Response({"message": "Package hard-deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
+    
+class TestRchpackage(APIView):
+    permission_classes = [AllowAny]  # ✅ Open access for testing
+    def get(self, request):
+        return Response({"message": "This is a test response from the rchpackage app."}, status=status.HTTP_200_OK)

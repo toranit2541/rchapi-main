@@ -3,7 +3,7 @@ from account.views import RegisterView, ChangePasswordView, UpdateProfileView, L
 from rest_framework_simplejwt.views import TokenRefreshView, TokenObtainPairView
 
 from rest_framework.routers import DefaultRouter
-from .views import CustomTokenObtainPairView, UserProfileViewSet, api_list_view
+from .views import CustomTokenObtainPairView, TestAccount, UserProfileViewSet, api_list_view
 
 router = DefaultRouter()
 router.register(r'userprofiles', UserProfileViewSet, basename='userprofile')
@@ -17,5 +17,6 @@ urlpatterns = [
     path('update_profile/<int:pk>/', UpdateProfileView.as_view(), name='auth_update_profile'),
     path('logout/', LogoutView.as_view(), name='auth_logout'),
     path('logout_all/', LogoutAllView.as_view(), name='auth_logout_all'),
+    path('test/', TestAccount.as_view(), name='test_account'),
     path('', include(router.urls)),
 ]

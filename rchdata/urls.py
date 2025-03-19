@@ -15,6 +15,7 @@ router.register(r'v_result_app', VResultAppViewSet)
 # router.register(r'lab-results-dynamic',get_lab_results_dynamic, basename='lab-results-dynamic')
 
 urlpatterns = [
+    path('test/', views.TestRchdata.as_view(), name='test_rchdata'),
     path('VResult/', get_vresult, name='get_vresult'),
     path("lab-results/", get_lab_results, name="lab_results"),
     path('lab-results-dynamic/', get_lab_results_dynamic, name='lab-results-dynamic'),

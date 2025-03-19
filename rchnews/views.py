@@ -4,6 +4,8 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from rest_framework.response import Response
 from .models import News
 from .serializers import NewsSerializer
+from rest_framework.views import APIView
+from rest_framework.permissions import AllowAny
 
 class NewsViewSet(viewsets.ModelViewSet):
     queryset = News.objects.all()
@@ -55,3 +57,8 @@ class NewsViewSet(viewsets.ModelViewSet):
         instance = self.get_object()
         instance.delete()
         return Response({"message": "News hard-deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
+    
+class TestRchnews(APIView):
+    permission_classes = [AllowAny]  # ✅ Open access for testing
+    def get(self, request):
+        return Response({"message": "This is a test endpoint for the RchNews app."},status=status.HTTP_200_OK)
