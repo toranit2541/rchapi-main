@@ -109,10 +109,14 @@ class TestAccount(APIView):
     def get(self, request):
         return Response({"message": "This is a test endpoint for the Account app."}, status=status.HTTP_200_OK)
     
+def privacy(request):
+    return render(request, 'privacy.html')
 
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
 def delete_account(request):
     request.user.delete()
     return Response({"message": "Account deleted successfully"}, status=200)
+
+
     
