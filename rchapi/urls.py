@@ -32,6 +32,7 @@ urlpatterns = [
     path('articles/',include("rcharticle.urls")),
     path('promotions/',include("rchpromotion.urls")),
     path('events/',include("rcheven.urls")),
+    path('privacy/', include("privacy.urls")),
     path('', include(router.urls)),
 ]
 
