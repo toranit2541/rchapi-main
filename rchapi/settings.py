@@ -46,8 +46,14 @@ CORS_ALLOW_METHODS = [
 ]
 CORS_ALLOW_CREDENTIALS = True
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'fallback-key-change-this')
-# DEBUG = False
-ALLOWED_HOSTS = ["ruamchai.com", "www.ruamchai.com","171.103.208.149"]
+DEBUG = False
+ALLOWED_HOSTS = [
+    "ruamchai.com",
+    "www.ruamchai.com",
+    "171.103.208.149",
+    "localhost",
+    "127.0.0.1"
+]
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
