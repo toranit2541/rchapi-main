@@ -24,14 +24,14 @@ SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
     "https://www.ruamchai.com",
-    "http://www.ruamchai.com",
+    # "http://www.ruamchai.com",
     "https://ruamchai.com",   
-    "http://ruamchai.com",
+    # "http://ruamchai.com",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "http://www.ruamchai.com",
-    "http://ruamchai.com",
+    # "http://www.ruamchai.com",
+    # "http://ruamchai.com",
     "https://www.ruamchai.com",
     "https://ruamchai.com",
 ]
@@ -50,9 +50,9 @@ DEBUG = False
 ALLOWED_HOSTS = [
     "ruamchai.com",
     "www.ruamchai.com",
-    "171.103.208.149",
-    "localhost",
-    "127.0.0.1"
+    # "171.103.208.149",
+    # "localhost",
+    # "127.0.0.1"
 ]
 INSTALLED_APPS = [
     'django.contrib.admin',
