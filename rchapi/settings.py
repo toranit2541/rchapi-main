@@ -124,12 +124,12 @@ WSGI_APPLICATION = 'rchapi.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": "mssql",
-        "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_PASSWORD",""),
-        "HOST": os.getenv("DB_HOST"),
-        "PORT": os.getenv("DB_PORT", "1433"),
+        'ENGINE': 'mssql',
+        'NAME': 'Ruamchai',
+        'USER': 'sa',
+        'PASSWORD': '',
+        'HOST': '192.168.26.253',
+        'PORT': '1433',
         "OPTIONS": {
             "driver": "ODBC Driver 17 for SQL Server",
         },

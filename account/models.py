@@ -7,9 +7,10 @@ class Account(models.Model):
     gender = models.CharField(choices=[('MALE','MALE'),('FEMALE','FEMALE'),('OTHER','OTHER')],max_length=10)
     birthday = models.DateTimeField()
     phonenumber = models.CharField(max_length=10, blank=True, null=True)
-    
+
     class Meta:
-        managed = False 
+        managed = False  # No migrations will be created for this model
+
     
 class UserProfile(models.Model):
     id = models.AutoField(primary_key=True)
