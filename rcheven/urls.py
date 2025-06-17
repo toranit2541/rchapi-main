@@ -3,10 +3,10 @@ from rest_framework.routers import DefaultRouter
 from .views import EventQueryView, EventViewSet, TestRchEven
 
 router = DefaultRouter()
-router.register(r'event', EventViewSet)
+router.register(r'even', EventViewSet)
 
 urlpatterns = [
     path('test/', TestRchEven.as_view(), name='test_event'),
-    path('events/', EventQueryView.as_view(), name='event_query'),  # ✅ Changed
+    path('evens/', EventQueryView.as_view(), name='even_query'),  # ✅ Changed
     path('', include(router.urls)),
 ]
