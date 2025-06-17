@@ -52,7 +52,7 @@ ALLOWED_HOSTS = [
     "www.ruamchai.com",
     # "171.103.208.149",
     # "localhost",
-    # "127.0.0.1"
+    "127.0.0.1"
 ]
 INSTALLED_APPS = [
     'django.contrib.admin',
