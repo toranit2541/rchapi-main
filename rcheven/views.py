@@ -1,9 +1,9 @@
-from requests import Response
-from rest_framework import viewsets
+from rest_framework.response import Response
+from rest_framework import status, viewsets
+from rest_framework.views import APIView
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from .models import Event
 from .serializers import EventSerializer
-from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny, IsAuthenticated 
 
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
