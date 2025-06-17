@@ -9,3 +9,4 @@ urlpatterns = [
     path('test/', TestRchEven.as_view(), name='test_event'),
     path('events/', EventQueryView.as_view(), name='event_query'),  # ✅ Changed
     path('', include(router.urls)),
+]
