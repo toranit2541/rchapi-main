@@ -11,7 +11,7 @@ class EventViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]  # Change to AllowAny if you want public access
 
 class EventQueryView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def post(self, request):
         hn = request.data.get('HN')
@@ -21,11 +21,15 @@ class EventQueryView(APIView):
             return Response({"error": "HN and HnYear are required"}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            event = Event.objects.get(HN=hn, HnYear=hn_year)
-            serializer = EventSerializer(event)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        except Event.DoesNotExist:
-            return Response({"error": "Event not found"}, status=status.HTTP_404_NOT_FOUND)
+            events = Event.objects.filter(HN=hn, HnYear=hn_year)
+            if not events.exists():
+                return Response({"events": []}, status=status.HTTP_200_OK)
+
+            serializer = EventSerializer(events, many=True)
+            return Response({"events": serializer.data}, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class TestRchEven(APIView):
