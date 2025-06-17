@@ -2,10 +2,10 @@ from django.db import models
 
 class Event(models.Model):
     HN = models.CharField(max_length=10)
-    HnYear = models.IntgerField(max_length=4)
+    HnYear = models.IntegerField()
     Reason = models.CharField(max_length=255, blank=True, null=True)
-    MDate = models.DateField(blank=True, null=True)
-    MTime = models.TimeField(blank=True, null=True)
+    MDate = models.DateTimeField(blank=True, null=True)
+    MTime = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         managed = False
