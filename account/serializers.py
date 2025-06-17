@@ -126,6 +126,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
         if patient:
             return {
                 "citizenID": patient.citizenID,
+                "HN": patient.HN,
+                "HnYear": patient.HnYear,
                 "titlename": patient.titlename,
                 "addressNo": patient.addressNo,
                 "street": patient.street,
