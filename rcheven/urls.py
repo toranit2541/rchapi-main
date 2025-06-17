@@ -7,6 +7,6 @@ router.register(r'even', EventViewSet)
 
 urlpatterns = [
     path('test/', TestRchEven.as_view(), name='test_event'),
-    path('evens/', EventQueryView.as_view(), name='even_query'),  # ✅ Changed
+    path('evens/', EventQueryView.as_view(), name='even_query'),
     path('', include(router.urls)),
 ]

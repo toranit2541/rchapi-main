@@ -13,9 +13,9 @@ class EventViewSet(viewsets.ModelViewSet):
 class EventQueryView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def get(self, request):
-        hn = request.query_params.get('HN')
-        hn_year = request.query_params.get('HnYear')
+    def post(self, request):
+        hn = request.data.get('HN')
+        hn_year = request.data.get('HnYear')
 
         if not hn or not hn_year:
             return Response({"error": "HN and HnYear are required"}, status=status.HTTP_400_BAD_REQUEST)
