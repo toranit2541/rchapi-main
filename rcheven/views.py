@@ -3,13 +3,32 @@ from rest_framework import viewsets
 from .models import Event
 from .serializers import EventSerializer
 from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated 
 
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+    permission_classes = [IsAuthenticated]  # Change to AllowAny if you want public access
+
+class EventQueryView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        hn = request.query_params.get('HN')
+        hn_year = request.query_params.get('HnYear')
+
+        if not hn or not hn_year:
+            return Response({"error": "HN and HnYear are required"}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            event = Event.objects.get(HN=hn, HnYear=hn_year)
+            serializer = EventSerializer(event)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Event.DoesNotExist:
+            return Response({"error": "Event not found"}, status=status.HTTP_404_NOT_FOUND)
+
 
 class TestRchEven(APIView):
-    permission_classes = [AllowAny]  # ✅ Open access for testing
+    permission_classes = [AllowAny]  
     def get(self, request):
         return Response({"message": "This is a test endpoint for the RchData app."},status=status.HTTP_200_OK)
