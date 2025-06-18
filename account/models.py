@@ -61,7 +61,7 @@ class Tambol(models.Model):
 class PatientData(models.Model):
     citizenID = models.CharField(max_length=20, unique=True, primary_key=True)  # Explicit primary key
     HN = models.CharField(max_length=10, blank=True, null=True)
-    HnYear = models.CharField(max_length=4, blank=True, null=True)
+    HnYear = models.IntgerField(blank=True, null=True)
     titlename = models.CharField(max_length=50, blank=True, null=True)
     addressNo = models.CharField(max_length=10, blank=True, null=True)
     street = models.CharField(max_length=255, blank=True, null=True)
